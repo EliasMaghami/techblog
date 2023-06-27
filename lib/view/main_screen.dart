@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/models/fake_data.dart';
-import 'package:techblog/my_colors.dart';
+import 'package:techblog/component/my_colors.dart';
 import 'package:techblog/component/my_string.dart';
 import 'package:techblog/view/home_screen.dart';
 import 'package:techblog/view/profile_screen.dart';

@@ -1,10 +1,15 @@
 // ignore_for_file: unnecessary_import
 
-import 'package:flutter/cupertino.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import '../gen/assets.gen.dart';
-import '../models/fake_data.dart';
-import '../my_colors.dart';
+import 'package:techblog/component/my_colors.dart';
+import 'package:techblog/gen/assets.gen.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'package:flutter/cupertino.dart';
+
+import 'models/fake_data.dart';
 
 // ignore: camel_case_types
 class teckDivider extends StatelessWidget {
@@ -67,5 +72,13 @@ class MainTags extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+lunchUrl(String url) async {
+  if (await canLaunchUrl(Uri.parse(url))) {
+    await launchUrl(Uri());
+  } else {
+    log("could not launch$url");
   }
 }

@@ -2,6 +2,7 @@
 
 class myString {
   static const String viewRecentBlog = " View the latest posts";
+  static const String techBlogUrl = "https://github.com/EliasMaghami/techblog";
   static const String viewRecentPodcast = " View the latest podcasts";
   static const String relatedArticle = " Related posts";
   static const String submitArticle = "Related posts ";

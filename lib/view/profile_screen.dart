@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:techblog/gen/assets.gen.dart';
-import 'package:techblog/my_colors.dart';
+import 'package:techblog/component/my_colors.dart';
 import 'package:techblog/component/my_string.dart';
 
 import '../mycomponent.dart';
