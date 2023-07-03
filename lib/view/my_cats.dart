@@ -4,7 +4,7 @@ import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/models/data_models.dart';
 import 'package:techblog/models/fake_data.dart';
 import 'package:techblog/component/my_string.dart';
-import 'package:techblog/mycomponent.dart';
+import 'package:techblog/component/mycomponent.dart';
 import '../component/my_colors.dart';
 
 class MyCats extends StatefulWidget {

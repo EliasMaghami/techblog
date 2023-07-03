@@ -10,7 +10,7 @@ import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/models/fake_data.dart';
 import 'package:techblog/component/my_colors.dart';
 import 'package:techblog/component/my_string.dart';
-import 'package:techblog/mycomponent.dart';
+import 'package:techblog/component/mycomponent.dart';
 import 'package:techblog/services.dart/dio_service.dart';
 import 'package:techblog/view/home_screen.dart';
 import 'package:techblog/view/profile_screen.dart';
@@ -25,7 +25,6 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DioService().getMethod(ApiConstant.getHomeItem);
     var size = MediaQuery.of(context).size;
     var texttheme = Theme.of(context).textTheme;
     double bodyMargin = size.width / 22;
@@ -125,7 +124,7 @@ class MainScreen extends StatelessWidget {
                 child: Obx(() => IndexedStack(
                       index: selectedPageIndex.value,
                       children: [
-                        homeScreen(
+                        HomeScreen(
                             size: size,
                             texttheme: texttheme,
                             bodyMargin: bodyMargin), //0

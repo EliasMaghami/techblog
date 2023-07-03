@@ -3,13 +3,15 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/instance_manager.dart';
 import 'package:techblog/component/my_colors.dart';
+import 'package:techblog/component/text_style.dart';
+import 'package:techblog/controller/home_screen_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter/cupertino.dart';
-
-import 'models/fake_data.dart';
 
 // ignore: camel_case_types
 class teckDivider extends StatelessWidget {
@@ -65,7 +67,7 @@ class MainTags extends StatelessWidget {
             ),
 
             Text(
-              tagList[index].title,
+              Get.find<HomeScreenController>().tagsList[index].title!,
               style: textTheme.bodyLarge,
             ),
           ],
@@ -82,4 +84,49 @@ myLunchUrl(String url) async {
   } else {
     log("could not launch${uri.toString()}");
   }
+}
+
+// ignore: camel_case_types
+class loading extends StatelessWidget {
+  const loading({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const SpinKitFadingCube(
+      color: SolidColors.primeryColor,
+      size: 32,
+    );
+  }
+}
+
+PreferredSize appBar(String title) {
+  return PreferredSize(
+    preferredSize: const Size.fromHeight(60),
+    child: Padding(
+      padding: const EdgeInsets.all(12),
+      child: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(left: 16),
+            child: Center(child: Text(title, style: appBarTextStyle)),
+          ),
+        ],
+        leading: Padding(
+          padding: const EdgeInsets.only(right: 16),
+          child: Container(
+            height: 40,
+            width: 40,
+            decoration: BoxDecoration(
+                color: Colors.orangeAccent.withBlue(100),
+                shape: BoxShape.circle),
+            child: const Icon(Icons.keyboard_arrow_left_rounded),
+          ),
+        ),
+      ),
+    ),
+  );
 }
