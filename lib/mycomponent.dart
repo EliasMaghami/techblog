@@ -75,10 +75,11 @@ class MainTags extends StatelessWidget {
   }
 }
 
-lunchUrl(String url) async {
+myLunchUrl(String url) async {
+  var uri = Uri.parse(url);
   if (await canLaunchUrl(Uri.parse(url))) {
-    await launchUrl(Uri());
+    await launchUrl(uri);
   } else {
-    log("could not launch$url");
+    log("could not launch${uri.toString()}");
   }
 }

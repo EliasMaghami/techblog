@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:techblog/component/api_constant.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/models/fake_data.dart';
 import 'package:techblog/component/my_colors.dart';
 import 'package:techblog/component/my_string.dart';
+import 'package:techblog/mycomponent.dart';
+import 'package:techblog/services.dart/dio_service.dart';
 import 'package:techblog/view/home_screen.dart';
 import 'package:techblog/view/profile_screen.dart';
 
@@ -22,6 +25,7 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DioService().getMethod(ApiConstant.getHomeItem);
     var size = MediaQuery.of(context).size;
     var texttheme = Theme.of(context).textTheme;
     double bodyMargin = size.width / 22;
@@ -76,7 +80,9 @@ class MainScreen extends StatelessWidget {
                     "Drawer injast",
                     style: texttheme.bodyMedium,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    myLunchUrl(myString.techBlogUrl);
+                  },
                 ),
                 const Divider(
                   color: SolidColors.dividorcolor,
