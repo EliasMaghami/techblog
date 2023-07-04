@@ -5,6 +5,8 @@ import 'package:techblog/models/artikel_model.dart';
 import 'package:techblog/models/tags_model.dart';
 import 'package:techblog/services.dart/dio_service.dart';
 
+import '../view/single.dart';
+
 class SingleArticleController extends GetxController {
   RxBool loading = false.obs;
   RxInt id = RxInt(0);
@@ -17,7 +19,7 @@ class SingleArticleController extends GetxController {
     getArticleInfo();
   }
 
-  getArticleInfo() async {
+  getArticleInfo([String? id]) async {
     articleInfoModle = ArtikelInfoModle().obs;
     //TODO user id is hard code
     var userId = '';
@@ -40,5 +42,7 @@ class SingleArticleController extends GetxController {
     response.data['tags'].forEach((element) {
       releatedList.add(ArticleModel.fromJson(element));
     });
+
+    Get.to(Single());
   }
 }

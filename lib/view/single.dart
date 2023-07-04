@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -12,11 +14,12 @@ import '../controller/single_article__controller.dart';
 // ignore: must_be_immutable
 class Single extends StatelessWidget {
   Single({super.key});
+
   SingleArticleController singleArticleController =
       Get.put(SingleArticleController());
+
   @override
   Widget build(BuildContext context) {
-    // Size size;
     var textTheme = Theme.of(context).textTheme;
     return SafeArea(
       child: Scaffold(
@@ -166,7 +169,51 @@ class Single extends StatelessWidget {
     );
   }
 
-// Widget simmilar(textTheme){
-
-// }
+  Widget simmilar(textThem) {
+    return SizedBox(
+      height: Get.height / 3.5,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: singleArticleController.releatedList.length,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: (() {
+                singleArticleController.getArticleInfo(
+                    singleArticleController.releatedList[index].id!);
+              }),
+              child: Padding(
+                padding:
+                    EdgeInsets.only(right: index == 0 ? Get.width / 15 : 15),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: SizedBox(
+                        height: Get.height / 5.3,
+                        width: Get.width / 2.4,
+                        child: Stack(
+                          children: [
+                            CachedNetworkImage(
+                              imageUrl: singleArticleController
+                                  .articleInfoModle.value.image!,
+                              imageBuilder: ((context, imageProvider) => Image(
+                                  image: imageProvider, fit: BoxFit.cover)),
+                              placeholder: (context, url) => const loading(),
+                              errorWidget: (context, url, error) => const Icon(
+                                Icons.image_not_supported_outlined,
+                                size: 55,
+                                color: Colors.deepOrange,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
+          }),
+    );
+  }
 }

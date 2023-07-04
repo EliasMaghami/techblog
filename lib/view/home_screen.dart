@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:techblog/component/my_string.dart';
 import 'package:techblog/controller/home_screen_controller.dart';
 import 'package:techblog/component/mycomponent.dart';
+import 'package:techblog/controller/single_article__controller.dart';
+import 'package:techblog/view/articel_list_screen.dart';
 import '../gen/assets.gen.dart';
 import '../models/fake_data.dart';
 import 'package:techblog/component/my_colors.dart';
@@ -25,7 +27,8 @@ class HomeScreen extends StatelessWidget {
   final double bodyMargin;
 
   HomeScreenController homeScreenController = Get.put(HomeScreenController());
-
+  SingleArticleController singleArticleController =
+      Get.put(SingleArticleController());
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -46,8 +49,12 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
+
                     //seemore: hamon titre balay posts & podcast
-                    seeMoreBlog(bodyMargin: bodyMargin, texttheme: texttheme),
+                    GestureDetector(
+                        onTap: () => Get.to(ArticleListScreen()),
+                        child: seeMoreBlog(
+                            bodyMargin: bodyMargin, texttheme: texttheme)),
                     //blog List
                     topVsited(),
                     const SizedBox(
@@ -70,7 +77,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget topVsited() {
     return SizedBox(
-      height: size.height / 4.1,
+      height: size.height / 3.5,
       child: Obx(
         () => ListView.builder(
             itemCount: homeScreenController.topVisitedList.length,
@@ -78,98 +85,104 @@ class HomeScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               //lastest post
               //pading wrap ba column ta neveshte zir image gharar begireh.
-              return Padding(
-                padding: EdgeInsets.only(left: bodyMargin),
-                child: Column(
-                  children: [
-                    CachedNetworkImage(
-                      imageUrl: homeScreenController.topPodcasts[index].poster!,
-                      imageBuilder: (context, imageProvider) => Container(
-                        decoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(16)),
-                          image: DecorationImage(
-                              image: imageProvider, fit: BoxFit.cover),
+              return GestureDetector(
+                onTap: () => Get.find<SingleArticleController>().getArticleInfo(
+                    HomeScreenController().topVisitedList[index].id),
+                child: Padding(
+                  padding: EdgeInsets.only(left: bodyMargin),
+                  child: Column(
+                    children: [
+                      CachedNetworkImage(
+                        imageUrl:
+                            homeScreenController.topPodcasts[index].poster!,
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(16)),
+                            image: DecorationImage(
+                                image: imageProvider, fit: BoxFit.cover),
+                          ),
+                        ),
+                        placeholder: (context, url) => const loading(),
+                        errorWidget: (context, url, error) => const Icon(
+                          Icons.image_not_supported_outlined,
+                          size: 50,
+                          color: Colors.amber,
                         ),
                       ),
-                      placeholder: (context, url) => const loading(),
-                      errorWidget: (context, url, error) => const Icon(
-                        Icons.image_not_supported_outlined,
-                        size: 50,
-                        color: Colors.amber,
-                      ),
-                    ),
-                    SizedBox(
-                      height: size.height / 5.3,
-                      width: size.width / 2.4,
-                      child: Stack(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              //inja image bayad az Url bevasile NetworkImage initializ shavad.
-                              // image: DecorationImage(image: NetworkImage(blogList[index].imageUr),
-                              // fit: BoxFit.cover,
+                      SizedBox(
+                        height: size.height / 5.3,
+                        width: size.width / 2.4,
+                        child: Stack(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                //inja image bayad az Url bevasile NetworkImage initializ shavad.
+                                // image: DecorationImage(image: NetworkImage(blogList[index].imageUr),
+                                // fit: BoxFit.cover,
 
-                              //image besorat dasti vared shode va eshtebah ast.
-                              image: DecorationImage(
-                                image: NetworkImage(homeScreenController
-                                    .topVisitedList[index].image!),
-                                fit: BoxFit.cover,
+                                //image besorat dasti vared shode va eshtebah ast.
+                                image: DecorationImage(
+                                  image: NetworkImage(homeScreenController
+                                      .topVisitedList[index].image!),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              foregroundDecoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                  gradient: LinearGradient(
+                                    colors: GradiantColors.bottenNavigation,
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.topLeft,
+                                  )),
+                            ),
+                            Positioned(
+                              bottom: 8,
+                              left: 0,
+                              right: 0,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(
+                                    //bad az dastresi be Url in code faal shavad
+                                    // blogList[index].writer
+
+                                    HomePagePosterMap["writer"] +
+                                        " - " +
+                                        HomePagePosterMap["view"],
+                                    //bad az dastresi be Url in code faal shavad
+                                    //blogList[index].views,
+                                    style: texttheme.bodyLarge,
+                                  ),
+                                  const Icon(
+                                    Icons.remove_red_eye_sharp,
+                                    color: Colors.white,
+                                    size: 14,
+                                  )
+                                ],
                               ),
                             ),
-                            foregroundDecoration: const BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
-                                gradient: LinearGradient(
-                                  colors: GradiantColors.bottenNavigation,
-                                  begin: Alignment.bottomLeft,
-                                  end: Alignment.topLeft,
-                                )),
-                          ),
-                          Positioned(
-                            bottom: 8,
-                            left: 0,
-                            right: 0,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Text(
-                                  //bad az dastresi be Url in code faal shavad
-                                  // blogList[index].writer
-
-                                  HomePagePosterMap["writer"] +
-                                      " - " +
-                                      HomePagePosterMap["view"],
-                                  //bad az dastresi be Url in code faal shavad
-                                  //blogList[index].views,
-                                  style: texttheme.bodyLarge,
-                                ),
-                                const Icon(
-                                  Icons.remove_red_eye_sharp,
-                                  color: Colors.white,
-                                  size: 14,
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
 
-                    //Url to do
-                    // Text(blogList[index].title),
-                    SizedBox(
-                      //saizbox bayad bezarim va weidth bedim.
-                      width: size.width / 2.4,
-                      child: Text(
-                        homeScreenController.tagsList[index].author!,
-                        style: texttheme.bodyMedium,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
+                      //Url to do
+                      // Text(blogList[index].title),
+                      SizedBox(
+                        //saizbox bayad bezarim va weidth bedim.
+                        width: size.width / 2.4,
+                        child: Text(
+                          homeScreenController.tagsList[index].author!,
+                          style: texttheme.bodyMedium,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             }),
