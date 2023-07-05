@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:get/get.dart';
 import 'package:techblog/component/api_constant.dart';
 import 'package:techblog/models/artikel_info_model.dart';
@@ -24,7 +26,7 @@ class SingleArticleController extends GetxController {
     //TODO user id is hard code
     var userId = '';
     var response = await DioSevice().getMethod(
-        ApiConstant.baseUrl + 'article/get.php?command=info&id=1&user_id=1');
+        '${ApiConstant.baseUrl}article/get.php?command=info&id=1&user_id=1');
     loading.value = true;
 //https:techblog.sasansafari.com/techblog/api/article/get.php?command=info&id=1&user_id=1
 

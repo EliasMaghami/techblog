@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:techblog/component/mycomponent.dart';
 import 'package:techblog/controller/list_article__controller.dart';
 import 'package:techblog/controller/single_article__controller.dart';
-import 'package:techblog/view/single.dart';
 
 // ignore: must_be_immutable
 class ArticleListScreen extends StatelessWidget {

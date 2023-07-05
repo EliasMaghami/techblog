@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:techblog/component/api_constant.dart';
+import 'package:techblog/controller/register_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/models/fake_data.dart';
 import 'package:techblog/component/my_colors.dart';
@@ -14,6 +15,7 @@ import 'package:techblog/component/mycomponent.dart';
 import 'package:techblog/services.dart/dio_service.dart';
 import 'package:techblog/view/home_screen.dart';
 import 'package:techblog/view/profile_screen.dart';
+import 'package:techblog/view/register/register_intro.dart';
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
@@ -149,8 +151,9 @@ class MainScreen extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class BottonNavigation extends StatelessWidget {
-  const BottonNavigation({
+  BottonNavigation({
     super.key,
     required this.size,
     required this.bodyMargin,
@@ -160,6 +163,10 @@ class BottonNavigation extends StatelessWidget {
   final Size size;
   final double bodyMargin;
   final Function(int) changeScreen;
+
+  RegisterController registerController =
+      Get.put(RegisterController(), permanent: false);
+
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -202,7 +209,9 @@ class BottonNavigation extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                    onPressed: (() => changeScreen(2)),
+                    onPressed: (() {
+                      Get.find<RegisterController>().toggleLogin();
+                    }),
                     icon: ImageIcon(
                       Assets.icons.paar.image().image,
                       color: Colors.white,

@@ -244,6 +244,7 @@ class HomeScreen extends StatelessWidget {
         Container(
           width: size.width / 1.12,
           height: size.height / 4.5,
+          // ignore: sort_child_properties_last
           child: CachedNetworkImage(
             imageUrl: homeScreenController.poster.value.image!,
             imageBuilder: (context, imageProvider) => Container(

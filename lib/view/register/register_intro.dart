@@ -1,14 +1,17 @@
-// ignore_for_file: unnecessary_import, sort_child_properties_last
+// ignore_for_file: unnecessary_import, sort_child_properties_last, must_be_immutable
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:techblog/controller/register_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/component/my_string.dart';
-import 'package:techblog/view/my_cats.dart';
 import 'package:validators/validators.dart';
 
 class RegisterIntro extends StatelessWidget {
-  const RegisterIntro({super.key});
+  RegisterIntro({super.key});
+
+  var registerController = Get.find<RegisterController>();
   @override
   Widget build(BuildContext context) {
     var texttheme = Theme.of(context).textTheme;
@@ -75,6 +78,7 @@ class RegisterIntro extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(24, 24, 24, 24),
                     child: TextField(
+                      controller: registerController.emailTextEditingController,
                       onChanged: (value) {
                         // ignore: avoid_print
                         print("${value}is email :${isEmail(value)}");
@@ -88,6 +92,7 @@ class RegisterIntro extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
+                      registerController.register();
                       Navigator.pop(context);
 
                       _activatCodeBottemSheet(context, size, texttheme);
@@ -133,6 +138,8 @@ class RegisterIntro extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(24, 24, 24, 24),
                     child: TextField(
+                      controller:
+                          registerController.activeCodeTextEditingController,
                       onChanged: (value) {
                         // ignore: avoid_print
                         print(
@@ -147,8 +154,7 @@ class RegisterIntro extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => const MyCats()));
+                      registerController.verify();
                     },
                     child: const Text("go"),
                   ),

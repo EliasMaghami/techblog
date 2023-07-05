@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -25,7 +23,7 @@ class Single extends StatelessWidget {
       child: Scaffold(
         body: Obx(
           () => singleArticleController.articleInfoModle.value.title == null
-              ? SizedBox(height: Get.height, child: loading())
+              ? SizedBox(height: Get.height, child: const loading())
               : Column(
                   children: [
                     Stack(

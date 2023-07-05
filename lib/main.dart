@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:techblog/binding.dart';
 import 'package:techblog/component/my_colors.dart';
-import 'package:techblog/view/main_screen.dart';
+import 'package:techblog/view/splash_screen.dart';
 
-void main() {
+void main() async {
   SystemChrome.setSystemUIOverlayStyle(
     // SystemUiOverlayStyle.light
 
@@ -16,6 +18,7 @@ void main() {
       systemNavigationBarIconBrightness: Brightness.dark,
     ),
   );
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -27,6 +30,7 @@ class MyApp extends StatelessWidget {
     var texttheme = Theme.of(context).textTheme;
 
     return GetMaterialApp(
+      initialBinding: RegisterBinding(),
       debugShowCheckedModeBanner: false,
       title: 'Localizations Sample App',
       localizationsDelegates: const [
@@ -93,8 +97,8 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-      // home: SplashScreen(),
-      home: MainScreen(),
+      home: SplashScreen(),
+      // home: MainScreen(),
     );
   }
 }
