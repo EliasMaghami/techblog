@@ -12,9 +12,7 @@ import '../controller/single_article__controller.dart';
 // ignore: must_be_immutable
 class Single extends StatelessWidget {
   Single({super.key});
-
-  SingleArticleController singleArticleController =
-      Get.put(SingleArticleController());
+  var singleArticleController = Get.find<SingleArticleController>();
 
   @override
   Widget build(BuildContext context) {

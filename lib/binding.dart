@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:get/get_instance/src/bindings_interface.dart';
 import 'package:techblog/controller/list_article__controller.dart';
 import 'package:techblog/controller/single_article__controller.dart';
 

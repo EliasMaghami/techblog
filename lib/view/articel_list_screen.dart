@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:techblog/component/mycomponent.dart';
 import 'package:techblog/controller/list_article__controller.dart';
 import 'package:techblog/controller/single_article__controller.dart';
+import 'package:techblog/main.dart';
 
 // ignore: must_be_immutable
 class ArticleListScreen extends StatelessWidget {
@@ -28,9 +29,10 @@ class ArticleListScreen extends StatelessWidget {
             itemCount: listArticleController.articleList.length,
             itemBuilder: ((context, index) {
               return GestureDetector(
-                onTap: (() {
-                  singleArticleController.getArticleInfo(
+                onTap: (() async {
+                  await singleArticleController.getArticleInfo(
                       listArticleController.articleList[index].id);
+                  Get.toNamed(RoutSingleArticle);
                 }),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
