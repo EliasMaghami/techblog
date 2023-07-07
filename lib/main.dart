@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
     var texttheme = Theme.of(context).textTheme;
 
     return GetMaterialApp(
+      initialBinding: RegisterBinding(),
       debugShowCheckedModeBanner: false,
       theme: LigthTheme(texttheme),
       locale: const Locale('en'), // english

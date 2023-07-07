@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:techblog/component/api_constant.dart';
 import 'package:techblog/component/storage_const.dart';
+import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/services.dart/dio_service.dart';
 import 'package:techblog/view/main_screen.dart';
 import 'package:techblog/view/register/register_intro.dart';
@@ -65,5 +67,54 @@ class RegisterController extends GetxController {
     } else {
       debugPrint('post screen');
     }
+  }
+
+  routToWriteBottomSheet() {
+    Get.bottomSheet(
+      Container(
+        height: Get.height / 3,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                SvgPicture.asset(
+                  Assets.image.fox.path,
+                  height: 40,
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+                const Text("write your any things you know")
+              ],
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            const Text("""you can do it . just stay 
+            on way . dont give back"""),
+            Row(
+              children: [
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      Assets.image.fox.path,
+                      height: 20,
+                    )
+                  ],
+                ),
+                Row(
+                  children: [SvgPicture.asset(Assets.icons.micIcon.path)],
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

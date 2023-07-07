@@ -32,6 +32,7 @@ class ArticleListScreen extends StatelessWidget {
                 onTap: (() async {
                   await singleArticleController.getArticleInfo(
                       listArticleController.articleList[index].id);
+
                   Get.toNamed(RoutSingleArticle);
                 }),
                 child: Padding(

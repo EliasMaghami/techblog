@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:techblog/controller/list_article__controller.dart';
+import 'package:techblog/controller/register_controller.dart';
 import 'package:techblog/controller/single_article__controller.dart';
 
 class ArticleBinding implements Bindings {
@@ -18,7 +19,7 @@ class RegisterBinding implements Bindings {
   void dependencies() {
     // TODO: implement dependencies
 
-    Get.put(ListArticleController());
+    Get.put(RegisterController());
 
     Get.lazyPut(() => SingleArticleController());
   }
