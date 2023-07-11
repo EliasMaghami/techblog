@@ -4,14 +4,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:techblog/component/my_string.dart';
 import 'package:techblog/controller/home_screen_controller.dart';
 import 'package:techblog/component/mycomponent.dart';
-import 'package:techblog/controller/single_article__controller.dart';
-import 'package:techblog/view/articel_list_screen.dart';
-import '../gen/assets.gen.dart';
+import 'package:techblog/controller/article/single_article__controller.dart';
+import 'package:techblog/view/article/articel_list_screen.dart';
 import '../models/fake_data.dart';
-import 'package:techblog/component/my_colors.dart';
+import 'package:techblog/constant/my_colors.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
@@ -54,7 +52,10 @@ class HomeScreen extends StatelessWidget {
                     GestureDetector(
                         onTap: () => Get.to(ArticleListScreen()),
                         child: seeMoreBlog(
-                            bodyMargin: bodyMargin, texttheme: texttheme)),
+                          bodyMargin: bodyMargin,
+                          texttheme: texttheme,
+                          title: 'Show me title',
+                        )),
                     //blog List
                     topVsited(),
                     const SizedBox(
@@ -317,37 +318,6 @@ class HomeScreen extends StatelessWidget {
                 child: MainTags(textTheme: texttheme, index: index),
               );
             }),
-      ),
-    );
-  }
-}
-
-class seeMoreBlog extends StatelessWidget {
-  const seeMoreBlog({
-    super.key,
-    required this.bodyMargin,
-    required this.texttheme,
-  });
-
-  final double bodyMargin;
-  final TextTheme texttheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: bodyMargin, bottom: 15),
-      child: Row(
-        children: [
-          ImageIcon(
-            Assets.icons.pen.image().image,
-            color: SolidColors.colorTitel,
-            size: 20,
-          ),
-          Text(
-            myString.viewRecentBlog,
-            style: texttheme.titleSmall,
-          )
-        ],
       ),
     );
   }

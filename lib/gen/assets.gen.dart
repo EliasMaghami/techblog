@@ -34,6 +34,9 @@ class $AssetsIconsGen {
 class $AssetsImageGen {
   const $AssetsImageGen();
 
+  /// File path: assets/image/avatar.png
+  AssetGenImage get avatar => const AssetGenImage('assets/image/avatar.png');
+
   /// File path: assets/image/fox.svg
   SvgGenImage get fox => const SvgGenImage('assets/image/fox.svg');
 
@@ -45,7 +48,7 @@ class $AssetsImageGen {
   AssetGenImage get splash => const AssetGenImage('assets/image/splash.png');
 
   /// List of all assets
-  List<dynamic> get values => [fox, fullstack, splash];
+  List<dynamic> get values => [avatar, fox, fullstack, splash];
 }
 
 class Assets {

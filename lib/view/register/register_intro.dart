@@ -3,9 +3,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:techblog/controller/register_controller.dart';
+import 'package:techblog/controller/article/register_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
-import 'package:techblog/component/my_string.dart';
+import 'package:techblog/constant/my_string.dart';
 import 'package:validators/validators.dart';
 
 class RegisterIntro extends StatelessWidget {

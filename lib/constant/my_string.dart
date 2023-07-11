@@ -14,6 +14,8 @@ class myString {
   static const String insertYourPasword = "please insert your pasword";
   static const String welcomeNotePodcast =
       " welcome to Techblog , you should singup for send your podcast";
+  // ignore: constant_identifier_names
+  static const String ArticleEmpty = " Article is Emty";
 
   static const String chooseCats = "Choose the categories you like";
   static const String shareText = "Texts for the tech blog is hier";

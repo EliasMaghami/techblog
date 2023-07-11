@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,9 +6,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:techblog/binding.dart';
-import 'package:techblog/component/my_colors.dart';
+import 'package:techblog/constant/my_colors.dart';
+import 'package:techblog/view/article/manage_article.dart';
+import 'package:techblog/view/article/single%20_manage_article.dart';
 import 'package:techblog/view/main_screen.dart';
-import 'package:techblog/view/single.dart';
+import 'package:techblog/view/article/single.dart';
 import 'package:techblog/view/splash_screen.dart';
 
 void main() async {
@@ -26,6 +28,7 @@ void main() async {
   runApp(const MyApp());
 }
 
+// ignore: duplicate_ignore
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -46,20 +49,27 @@ class MyApp extends StatelessWidget {
 
       getPages: [
         GetPage(
-            name: RoutMainSCreen,
+            name: NamedRoute.routMainSCreen,
             page: () => MainScreen(),
             binding: RegisterBinding()),
         GetPage(
-            name: RoutMainSCreen,
+            name: NamedRoute.routSingleArticle,
             page: () => Single(),
             binding: ArticleBinding()),
+        GetPage(
+            name: NamedRoute.manageArticle,
+            page: () => ManageArticle(),
+            binding: ArticleManagerBinding()),
+        GetPage(
+            name: NamedRoute.singleManageArticle,
+            page: () => SingleManageArticle(),
+            binding: ArticleManagerBinding()),
       ],
 
       home: SplashScreen(),
     );
   }
 
-  // ignore: non_constant_identifier_names
   ThemeData LigthTheme(TextTheme texttheme) {
     return ThemeData(
       fontFamily: 'B-ROYA',
@@ -118,5 +128,9 @@ class MyApp extends StatelessWidget {
   }
 }
 
-const String RoutMainSCreen = "/MainScreen";
-const String RoutSingleArticle = "/SingleArticle";
+class NamedRoute {
+  static String routMainSCreen = "/MainScreen";
+  static String routSingleArticle = "/SingleArticle";
+  static String manageArticle = "/ManageArticle";
+  static String singleManageArticle = "/SingleManageArticle";
+}

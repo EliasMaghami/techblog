@@ -4,8 +4,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
-import 'package:techblog/component/my_colors.dart';
+import 'package:techblog/constant/my_colors.dart';
 import 'package:techblog/component/text_style.dart';
 import 'package:techblog/controller/home_screen_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
@@ -115,18 +116,57 @@ PreferredSize appBar(String title) {
             child: Center(child: Text(title, style: appBarTextStyle)),
           ),
         ],
-        leading: Padding(
-          padding: const EdgeInsets.only(right: 16),
-          child: Container(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-                color: Colors.orangeAccent.withBlue(100),
-                shape: BoxShape.circle),
-            child: const Icon(Icons.keyboard_arrow_left_rounded),
+        leading: GestureDetector(
+          onTap: () {
+            Get.back();
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                  color: Colors.orangeAccent.withBlue(100),
+                  shape: BoxShape.circle),
+              child: const Icon(Icons.keyboard_arrow_left_rounded),
+            ),
           ),
         ),
       ),
     ),
   );
+}
+
+// ignore: camel_case_types
+class seeMoreBlog extends StatelessWidget {
+  const seeMoreBlog({
+    super.key,
+    required this.bodyMargin,
+    required this.texttheme,
+    required this.title,
+  });
+
+  final double bodyMargin;
+  final TextTheme texttheme;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(left: bodyMargin, bottom: 15),
+      child: Row(
+        children: [
+          ImageIcon(
+            Assets.icons.pen.image().image,
+            color: SolidColors.colorTitel,
+            size: 20,
+          ),
+          Text(
+            title,
+            style: texttheme.titleSmall,
+          )
+        ],
+      ),
+    );
+  }
 }

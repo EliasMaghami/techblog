@@ -5,12 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:techblog/component/api_constant.dart';
-import 'package:techblog/controller/register_controller.dart';
+import 'package:techblog/component/dimens.dart';
+import 'package:techblog/constant/api_constant.dart';
+import 'package:techblog/controller/article/register_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/models/fake_data.dart';
-import 'package:techblog/component/my_colors.dart';
-import 'package:techblog/component/my_string.dart';
+import 'package:techblog/constant/my_colors.dart';
+import 'package:techblog/constant/my_string.dart';
 import 'package:techblog/component/mycomponent.dart';
 import 'package:techblog/services.dart/dio_service.dart';
 import 'package:techblog/view/home_screen.dart';
@@ -27,16 +28,16 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     var texttheme = Theme.of(context).textTheme;
-    double bodyMargin = size.width / 22;
+    var size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         key: _key,
         drawer: Drawer(
           backgroundColor: Colors.pink,
           child: Padding(
-            padding: EdgeInsets.only(left: bodyMargin, right: bodyMargin),
+            padding: EdgeInsets.only(
+                left: Dimens.bodyMargin, right: Dimens.bodyMargin),
             child: ListView(
               children: [
                 DrawerHeader(
@@ -129,17 +130,17 @@ class MainScreen extends StatelessWidget {
                         HomeScreen(
                             size: size,
                             texttheme: texttheme,
-                            bodyMargin: bodyMargin), //0
+                            bodyMargin: Dimens.bodyMargin), //0
 
                         profileScreen(
                             size: size,
                             texttheme: texttheme,
-                            bodyMargin: bodyMargin), //1
+                            bodyMargin: Dimens.bodyMargin), //1
                       ],
                     ))),
             BottonNavigation(
               size: size,
-              bodyMargin: bodyMargin,
+              bodyMargin: Dimens.bodyMargin,
               changeScreen: (int value) {
                 selectedPageIndex.value = value;
               },

@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:techblog/component/api_constant.dart';
-import 'package:techblog/component/storage_const.dart';
+import 'package:techblog/constant/api_constant.dart';
+import 'package:techblog/constant/storage_const.dart';
 import 'package:techblog/gen/assets.gen.dart';
+import 'package:techblog/main.dart';
 import 'package:techblog/services.dart/dio_service.dart';
 import 'package:techblog/view/main_screen.dart';
 import 'package:techblog/view/register/register_intro.dart';
@@ -24,7 +25,8 @@ class RegisterController extends GetxController {
       'command': 'register'
     };
 
-    var response = await DioSevice().postMethod(map, ApiConstant.postRsgtister);
+    var response =
+        await DioSevice().postMethod(map, ApiUrlConstant.postRsgtister);
     email = emailTextEditingController.text;
     userId = response.data['userId'];
     debugPrint(response);
@@ -38,17 +40,18 @@ class RegisterController extends GetxController {
       'command': 'verify'
     };
     debugPrint(map.toString());
-    var response = await DioSevice().postMethod(map, ApiConstant.postRsgtister);
+    var response =
+        await DioSevice().postMethod(map, ApiUrlConstant.postRsgtister);
     debugPrint(response.data);
     var status = response.data['responsse'];
 
     switch (status) {
       case 'varifide':
         var box = GetStorage();
-        box.write(token, response.data['token']);
-        box.write(userID, response.data['userID']);
-        debugPrint("read:::" + box.read(token));
-        debugPrint("read:::" + box.read(userID));
+        box.write(StorageKey.token, response.data['token']);
+        box.write(StorageKey.userID, response.data['userID']);
+        debugPrint("read:::" + box.read(StorageKey.token));
+        debugPrint("read:::" + box.read(StorageKey.userID));
 
         Get.offAll(MainScreen());
         break;
@@ -62,7 +65,7 @@ class RegisterController extends GetxController {
   }
 
   toggleLogin() {
-    if (GetStorage().read(token) == null) {
+    if (GetStorage().read(StorageKey.token) == null) {
       Get.to(RegisterIntro());
     } else {
       debugPrint('post screen');
@@ -98,17 +101,48 @@ class RegisterController extends GetxController {
             const Text("""you can do it . just stay 
             on way . dont give back"""),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      Assets.image.fox.path,
-                      height: 20,
-                    )
-                  ],
+                GestureDetector(
+                  onTap: () {
+                    debugPrint("write article");
+                    Get.toNamed(NamedRoute.manageArticle);
+                  },
+                  child: Container(
+                    color: Colors.white,
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(
+                          Assets.image.fox.path,
+                          height: 20,
+                        ),
+                        const SizedBox(
+                          width: 40,
+                        ),
+                        const Text("NotesManager"),
+                      ],
+                    ),
+                  ),
                 ),
-                Row(
-                  children: [SvgPicture.asset(Assets.icons.micIcon.path)],
+                GestureDetector(
+                  onTap: () {
+                    debugPrint("get podcast");
+                  },
+                  child: Container(
+                    color: Colors.white,
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          Assets.icons.micIcon.path,
+                          height: 20,
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        const Text("PadcastManager"),
+                      ],
+                    ),
+                  ),
                 )
               ],
             ),

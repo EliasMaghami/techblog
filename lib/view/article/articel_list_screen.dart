@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:techblog/component/mycomponent.dart';
-import 'package:techblog/controller/list_article__controller.dart';
-import 'package:techblog/controller/single_article__controller.dart';
+import 'package:techblog/controller/article/list_article__controller.dart';
+import 'package:techblog/controller/article/single_article__controller.dart';
 import 'package:techblog/main.dart';
 
 // ignore: must_be_immutable
@@ -33,7 +33,7 @@ class ArticleListScreen extends StatelessWidget {
                   await singleArticleController.getArticleInfo(
                       listArticleController.articleList[index].id);
 
-                  Get.toNamed(RoutSingleArticle);
+                  Get.toNamed(NamedRoute.routSingleArticle);
                 }),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
