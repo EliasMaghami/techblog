@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:techblog/controller/home_screen_controller.dart';
 import 'package:techblog/component/mycomponent.dart';
 import 'package:techblog/controller/article/single_article__controller.dart';
+import 'package:techblog/main.dart';
 import 'package:techblog/view/article/articel_list_screen.dart';
 import '../models/fake_data.dart';
 import 'package:techblog/constant/my_colors.dart';
@@ -51,9 +52,9 @@ class HomeScreen extends StatelessWidget {
                     //seemore: hamon titre balay posts & podcast
                     GestureDetector(
                         onTap: () => Get.to(ArticleListScreen()),
-                        child: seeMoreBlog(
+                        child: SeeMoreBlog(
                           bodyMargin: bodyMargin,
-                          texttheme: texttheme,
+                          textTheme: texttheme,
                           title: 'Show me title',
                         )),
                     //blog List
@@ -134,7 +135,7 @@ class HomeScreen extends StatelessWidget {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(15)),
                                   gradient: LinearGradient(
-                                    colors: GradiantColors.bottenNavigation,
+                                    colors: GradientColors.battenNavigation,
                                     begin: Alignment.bottomLeft,
                                     end: Alignment.topLeft,
                                   )),
@@ -193,46 +194,58 @@ class HomeScreen extends StatelessWidget {
 
   Widget topPodcast() {
     return SizedBox(
-      height: size.height / 4.1,
+      height: size.height / 3.5,
       child: Obx(
         () => ListView.builder(
             itemCount: HomeScreenController().topPodcasts.length,
+            scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      height: size.height / 5.3,
-                      width: size.width / 2.4,
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            homeScreenController.topPodcasts[index].poster!,
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(16)),
-                            image: DecorationImage(
-                                image: imageProvider, fit: BoxFit.cover),
+              return GestureDetector(
+                onTap: () {
+                  Get.toNamed(
+                    NamedRoute.singlePodcast,
+                    arguments: homeScreenController.topPodcasts[index].poster,
+                  );
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(right: index == 0 ? bodyMargin : 15),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          height: size.height / 5.3,
+                          width: size.width / 2.4,
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                homeScreenController.topPodcasts[index].poster!,
+                            imageBuilder: (context, imageProvider) => Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(16)),
+                                image: DecorationImage(
+                                    image: imageProvider, fit: BoxFit.cover),
+                              ),
+                            ),
+                            placeholder: (context, url) => const loading(),
+                            errorWidget: (context, url, error) => const Icon(
+                              Icons.image_not_supported_outlined,
+                              size: 50,
+                              color: Colors.amber,
+                            ),
                           ),
                         ),
-                        placeholder: (context, url) => const loading(),
-                        errorWidget: (context, url, error) => const Icon(
-                          Icons.image_not_supported_outlined,
-                          size: 50,
-                          color: Colors.amber,
+                      ),
+                      SizedBox(
+                        width: size.width / 2.4,
+                        child: Text(
+                          homeScreenController.topPodcasts[index].title!,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                  SizedBox(
-                    width: size.width / 2.4,
-                    child: Text(
-                      homeScreenController.topPodcasts[index].title!,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
+                ),
               );
             }),
       ),
@@ -265,7 +278,7 @@ class HomeScreen extends StatelessWidget {
           foregroundDecoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(15)),
             gradient: LinearGradient(
-              colors: GradiantColors.homePosterColorGradiant,
+              colors: GradientColors.homePosterColorGradient,
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),

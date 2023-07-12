@@ -34,7 +34,7 @@ big article you writing here for your fans !!!!""",
 
   getManagedArticle() async {
     loading.value = true;
-    var response = await DioSevice().getMethod(
+    var response = await DioService().getMethod(
         ApiUrlConstant.publishByMe + GetStorage().read(StorageKey.userID));
 
     //TODO:get user from getStorage Api Constant.getArticleList+userid
@@ -67,7 +67,7 @@ big article you writing here for your fans !!!!""",
       ApiArticleKeyConstant.tagList: "[]",
     };
     var response =
-        await DioSevice().postMethod(map, ApiUrlConstant.articlePost);
+        await DioService().postMethod(map, ApiUrlConstant.articlePost);
     log(response.data.toString());
     loading.value = false;
   }

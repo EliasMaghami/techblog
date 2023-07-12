@@ -21,7 +21,7 @@ class HomeScreenController extends GetxController {
   }
 
   getHomeItem() async {
-    var response = await DioSevice().getMethod(ApiUrlConstant.getHomeItem);
+    var response = await DioService().getMethod(ApiUrlConstant.getHomeItem);
     loading.value = true;
     if (response.statusCode == 200) {
       response.data['top_visited'].forEach((element) {

@@ -12,10 +12,10 @@ import '../../view/article/single.dart';
 class SingleArticleController extends GetxController {
   RxBool loading = false.obs;
   RxInt id = RxInt(0);
-  Rx<ArtikelInfoModle> articleInfoModle =
+  Rx<ArtikelInfoModle> articleInfoModel =
       ArtikelInfoModle(null, null, null).obs;
   RxList<TagsModel> tagList = RxList();
-  RxList<ArticleModel> releatedList = RxList();
+  RxList<ArticleModel> relatedList = RxList();
   @override
   onInit() {
     super.onInit();
@@ -23,16 +23,16 @@ class SingleArticleController extends GetxController {
   }
 
   getArticleInfo([String? id]) async {
-    articleInfoModle = ArtikelInfoModle(null, null, null).obs;
+    articleInfoModel = ArtikelInfoModle(null, null, null).obs;
     //TODO user id is hard code
     var userId = '';
-    var response = await DioSevice().getMethod(
+    var response = await DioService().getMethod(
         '${ApiUrlConstant.baseUrl}article/get.php?command=info&id=1&user_id=1');
     loading.value = true;
 //https:techblog.sasansafari.com/techblog/api/article/get.php?command=info&id=1&user_id=1
 
     if (response.statusCode == 200) {
-      articleInfoModle.value = ArtikelInfoModle.fromJson(response.data);
+      articleInfoModel.value = ArtikelInfoModle.fromJson(response.data);
       loading.value = false;
     }
 
@@ -41,9 +41,9 @@ class SingleArticleController extends GetxController {
       tagList.add(TagsModel.fromJson(element));
     });
 
-    releatedList.clear();
+    relatedList.clear();
     response.data['tags'].forEach((element) {
-      releatedList.add(ArticleModel.fromJson(element));
+      relatedList.add(ArticleModel.fromJson(element));
     });
 
     Get.to(Single());

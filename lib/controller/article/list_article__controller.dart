@@ -14,7 +14,7 @@ class ListArticleController extends GetxController {
   }
 
   getList() async {
-    var response = await DioSevice().getMethod(ApiUrlConstant.getArticleList);
+    var response = await DioService().getMethod(ApiUrlConstant.getArticleList);
     loading.value = true;
 
     //TODO:get user from getStorage Api Constant.getArticleList+userid
@@ -29,7 +29,7 @@ class ListArticleController extends GetxController {
 
   getArticleListWithTagsId(String tagId) async {
     articleList.clear();
-    var response = await DioSevice().getMethod(ApiUrlConstant.getArticleList);
+    var response = await DioService().getMethod(ApiUrlConstant.getArticleList);
     loading.value = true;
 
     //TODO:get user from getStorage Api Constant.getArticleList+userid

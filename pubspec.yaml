@@ -50,6 +50,8 @@ dependencies:
   get_storage: ^2.1.1
   file_picker: ^5.3.2
   html_editor_enhanced: ^2.5.1
+  percent_indicator: ^4.2.3
+  just_audio: ^0.9.34
 
 dev_dependencies:
   flutter_test:

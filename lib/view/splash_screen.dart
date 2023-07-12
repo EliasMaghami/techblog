@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 height: 45,
               ),
               const SpinKitRing(
-                color: SolidColors.primeryColor,
+                color: SolidColors.primaryColor,
                 size: 30.0,
               ),
             ],

@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names, non_constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -11,6 +9,7 @@ import 'package:techblog/view/article/manage_article.dart';
 import 'package:techblog/view/article/single%20_manage_article.dart';
 import 'package:techblog/view/main_screen.dart';
 import 'package:techblog/view/article/single.dart';
+import 'package:techblog/view/podcast/single_podcast.dart';
 import 'package:techblog/view/splash_screen.dart';
 
 void main() async {
@@ -39,7 +38,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       initialBinding: RegisterBinding(),
       debugShowCheckedModeBanner: false,
-      theme: LigthTheme(texttheme),
+      theme: ligthTheme(texttheme),
       locale: const Locale('en'), // english
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
@@ -64,13 +63,18 @@ class MyApp extends StatelessWidget {
             name: NamedRoute.singleManageArticle,
             page: () => SingleManageArticle(),
             binding: ArticleManagerBinding()),
+        GetPage(
+          name: NamedRoute.singlePodcast,
+          page: () => PodcastSingle(),
+        ),
       ],
 
       home: SplashScreen(),
+      //
     );
   }
 
-  ThemeData LigthTheme(TextTheme texttheme) {
+  ThemeData ligthTheme(TextTheme texttheme) {
     return ThemeData(
       fontFamily: 'B-ROYA',
       textTheme: const TextTheme(
@@ -78,27 +82,27 @@ class MyApp extends StatelessWidget {
             fontFamily: 'BROYABD',
             fontSize: 16,
             fontWeight: FontWeight.w700,
-            color: SolidColors.lightTextcolor),
+            color: SolidColors.lightTextColor),
         titleMedium: TextStyle(
             fontFamily: 'BROYA',
             fontSize: 16,
             fontWeight: FontWeight.w700,
-            color: SolidColors.textTitelcolor),
+            color: SolidColors.textTitleColor),
         titleSmall: TextStyle(
             fontFamily: 'BROYA',
             fontSize: 16,
             fontWeight: FontWeight.w700,
-            color: SolidColors.colorTitel),
+            color: SolidColors.colorTitle),
         bodyMedium: TextStyle(
             fontFamily: 'BROYA',
             fontSize: 14,
             fontWeight: FontWeight.w300,
-            color: SolidColors.textTitelcolor),
+            color: SolidColors.textTitleColor),
         bodyLarge: TextStyle(
           fontFamily: 'BROYA',
           fontSize: 14,
           fontWeight: FontWeight.w300,
-          color: SolidColors.lightTextcolor,
+          color: SolidColors.lightTextColor,
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
@@ -118,7 +122,7 @@ class MyApp extends StatelessWidget {
           }),
           backgroundColor: MaterialStateColor.resolveWith((states) {
             if (states.contains(MaterialState.pressed)) {
-              return SolidColors.primeryColor;
+              return SolidColors.primaryColor;
             }
             return Colors.amber;
           }),
@@ -129,8 +133,10 @@ class MyApp extends StatelessWidget {
 }
 
 class NamedRoute {
+  NamedRoute._();
   static String routMainSCreen = "/MainScreen";
   static String routSingleArticle = "/SingleArticle";
   static String manageArticle = "/ManageArticle";
   static String singleManageArticle = "/SingleManageArticle";
+  static String singlePodcast = "/singlePodcast";
 }

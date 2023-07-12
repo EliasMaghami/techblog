@@ -25,14 +25,14 @@ class SingleManageArticle extends StatelessWidget {
   getTitle() {
     Get.defaultDialog(
       title: "Title",
-      titleStyle: const TextStyle(color: SolidColors.scaffoldBGcolor),
+      titleStyle: const TextStyle(color: SolidColors.scaffoldBGColor),
       content: TextField(
         controller: manageArticleController.titleTextEditingController,
         keyboardType: TextInputType.text,
-        style: const TextStyle(color: SolidColors.colorTitel),
+        style: const TextStyle(color: SolidColors.colorTitle),
         decoration: const InputDecoration(hintText: 'write here'),
       ),
-      backgroundColor: SolidColors.primeryColor,
+      backgroundColor: SolidColors.primaryColor,
       radius: 8,
       confirm: ElevatedButton(
           onPressed: (() {
@@ -79,7 +79,7 @@ class SingleManageArticle extends StatelessWidget {
                       height: 60,
                       decoration: const BoxDecoration(
                         gradient: LinearGradient(
-                          colors: GradiantColors.singelAppBar,
+                          colors: GradientColors.singleAppBar,
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                         ),
@@ -102,9 +102,9 @@ class SingleManageArticle extends StatelessWidget {
                           ]),
                     ),
                   ),
-                  seeMoreBlog(
+                  SeeMoreBlog(
                     bodyMargin: Dimens.bodyMargin,
-                    texttheme: textTheme,
+                    textTheme: textTheme,
                     title: 'Show me title',
                   ),
                   Positioned(
@@ -118,7 +118,7 @@ class SingleManageArticle extends StatelessWidget {
                           height: 30,
                           width: Get.width / 3,
                           decoration: const BoxDecoration(
-                              color: SolidColors.primeryColor,
+                              color: SolidColors.primaryColor,
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(13),
                                   topRight: Radius.circular(13))),
@@ -145,9 +145,9 @@ class SingleManageArticle extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () => getTitle(),
-                child: seeMoreBlog(
+                child: SeeMoreBlog(
                   bodyMargin: Dimens.bodyMargin,
-                  texttheme: textTheme,
+                  textTheme: textTheme,
                   title: 'Edit Note',
                 ),
               ),
@@ -161,9 +161,9 @@ class SingleManageArticle extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () => Get.to(() => ArticleContentEditor()),
-                child: seeMoreBlog(
+                child: SeeMoreBlog(
                   bodyMargin: Dimens.bodyMargin,
-                  texttheme: textTheme,
+                  textTheme: textTheme,
                   title: 'Edit Original of Article',
                 ),
               ),
@@ -184,9 +184,9 @@ class SingleManageArticle extends StatelessWidget {
                 onTap: () {
                   choseCatsBottomSheet(textTheme);
                 },
-                child: seeMoreBlog(
+                child: SeeMoreBlog(
                   bodyMargin: Dimens.bodyMargin,
-                  texttheme: textTheme,
+                  textTheme: textTheme,
                   title: 'Chose your Type Of Article',
                 ),
               ),
@@ -236,7 +236,7 @@ class SingleManageArticle extends StatelessWidget {
                 height: 30,
                 decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(24)),
-                    color: SolidColors.primeryColor),
+                    color: SolidColors.primaryColor),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(8, 8, 8, 8.0),
                   child: Center(

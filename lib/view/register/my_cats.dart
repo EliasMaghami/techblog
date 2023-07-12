@@ -82,7 +82,7 @@ class _MyCatsState extends State<MyCats> {
                           decoration: const BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(15)),
-                              color: SolidColors.primeryColor),
+                              color: SolidColors.primaryColor),
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
                             child: Row(

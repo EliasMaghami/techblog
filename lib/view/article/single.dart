@@ -20,7 +20,7 @@ class Single extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Obx(
-          () => singleArticleController.articleInfoModle.value.title == null
+          () => singleArticleController.articleInfoModel.value.title == null
               ? SizedBox(height: Get.height, child: const loading())
               : Column(
                   children: [
@@ -28,7 +28,7 @@ class Single extends StatelessWidget {
                       children: [
                         CachedNetworkImage(
                           imageUrl: singleArticleController
-                              .articleInfoModle.value.image!,
+                              .articleInfoModel.value.image!,
                           imageBuilder: (context, imageProvider) =>
                               Image(image: imageProvider),
                           placeholder: (context, url) => const loading(),
@@ -42,7 +42,7 @@ class Single extends StatelessWidget {
                           child: Container(
                             decoration: const BoxDecoration(
                               gradient: LinearGradient(
-                                colors: GradiantColors.singelAppBar,
+                                colors: GradientColors.singleAppBar,
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
                               ),
@@ -86,7 +86,7 @@ class Single extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        singleArticleController.articleInfoModle.value.title!,
+                        singleArticleController.articleInfoModel.value.title!,
                         maxLines: 2,
                         style: textTheme.bodyMedium,
                       ),
@@ -104,7 +104,7 @@ class Single extends StatelessWidget {
                           ),
                           Text(
                             singleArticleController
-                                .articleInfoModle.value.author!,
+                                .articleInfoModel.value.author!,
                             style: textTheme.bodyMedium,
                           ),
                           const SizedBox(
@@ -112,7 +112,7 @@ class Single extends StatelessWidget {
                           ),
                           Text(
                             singleArticleController
-                                .articleInfoModle.value.createdAt!,
+                                .articleInfoModel.value.createdAt!,
                             style: textTheme.bodyMedium,
                           ),
                         ],
@@ -121,7 +121,7 @@ class Single extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: HtmlWidget(
-                        singleArticleController.articleInfoModle.value.content!,
+                        singleArticleController.articleInfoModel.value.content!,
                         textStyle: textTheme.bodyMedium,
                         enableCaching: true,
                         onLoadingBuilder: (context, element, loadingProgress) =>
@@ -168,17 +168,17 @@ class Single extends StatelessWidget {
     );
   }
 
-  Widget simmilar(textThem) {
+  Widget similar(textThem) {
     return SizedBox(
       height: Get.height / 3.5,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: singleArticleController.releatedList.length,
+          itemCount: singleArticleController.relatedList.length,
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: (() {
                 singleArticleController.getArticleInfo(
-                    singleArticleController.releatedList[index].id!);
+                    singleArticleController.relatedList[index].id!);
               }),
               child: Padding(
                 padding:
@@ -194,7 +194,7 @@ class Single extends StatelessWidget {
                           children: [
                             CachedNetworkImage(
                               imageUrl: singleArticleController
-                                  .articleInfoModle.value.image!,
+                                  .articleInfoModel.value.image!,
                               imageBuilder: ((context, imageProvider) => Image(
                                   image: imageProvider, fit: BoxFit.cover)),
                               placeholder: (context, url) => const loading(),

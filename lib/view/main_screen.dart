@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:techblog/component/decrations.dart';
 import 'package:techblog/component/dimens.dart';
 import 'package:techblog/constant/api_constant.dart';
 import 'package:techblog/controller/article/register_controller.dart';
@@ -53,7 +54,7 @@ class MainScreen extends StatelessWidget {
                   onTap: () {},
                 ),
                 const Divider(
-                  color: SolidColors.dividorcolor,
+                  color: SolidColors.dividerColor,
                 ),
                 ListTile(
                   title: Text(
@@ -63,7 +64,7 @@ class MainScreen extends StatelessWidget {
                   onTap: () {},
                 ),
                 const Divider(
-                  color: SolidColors.dividorcolor,
+                  color: SolidColors.dividerColor,
                 ),
                 ListTile(
                   title: Text(
@@ -75,7 +76,7 @@ class MainScreen extends StatelessWidget {
                   },
                 ),
                 const Divider(
-                  color: SolidColors.dividorcolor,
+                  color: SolidColors.dividerColor,
                 ),
                 ListTile(
                   title: Text(
@@ -87,7 +88,7 @@ class MainScreen extends StatelessWidget {
                   },
                 ),
                 const Divider(
-                  color: SolidColors.dividorcolor,
+                  color: SolidColors.dividerColor,
                 ),
               ],
             ),
@@ -97,7 +98,7 @@ class MainScreen extends StatelessWidget {
           // automaticallyImplyLeading: false baray pak kardan back felesh.
           automaticallyImplyLeading: false,
           elevation: 0,
-          backgroundColor: SolidColors.scaffoldBGcolor,
+          backgroundColor: SolidColors.scaffoldBGColor,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -180,7 +181,7 @@ class BottonNavigation extends StatelessWidget {
 
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: GradiantColors.btnNavigationBG,
+            colors: GradientColors.btnNavigationBG,
             begin: Alignment.bottomLeft,
             end: Alignment.bottomRight,
           ),
@@ -191,14 +192,7 @@ class BottonNavigation extends StatelessWidget {
           padding: EdgeInsets.only(right: bodyMargin, left: bodyMargin),
           child: Container(
             height: size.height / 8,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: GradiantColors.bottenNavigation,
-                begin: Alignment.bottomLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-            ),
+            decoration: MyDecorations.mainGradient,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

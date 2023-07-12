@@ -15,8 +15,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/cupertino.dart';
 
 // ignore: camel_case_types
-class teckDivider extends StatelessWidget {
-  const teckDivider({
+class techDivider extends StatelessWidget {
+  const techDivider({
     super.key,
     required this.size,
   });
@@ -26,7 +26,7 @@ class teckDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Divider(
-      color: SolidColors.dividorcolor,
+      color: SolidColors.dividerColor,
       thickness: 1.5,
       indent: size.width / 6,
       endIndent: size.width / 6,
@@ -52,7 +52,7 @@ class MainTags extends StatelessWidget {
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(25)),
         gradient: LinearGradient(
-            colors: GradiantColors.tags,
+            colors: GradientColors.tags,
             begin: Alignment.centerLeft,
             end: Alignment.centerRight),
       ),
@@ -96,7 +96,7 @@ class loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const SpinKitFadingCube(
-      color: SolidColors.primeryColor,
+      color: SolidColors.primaryColor,
       size: 32,
     );
   }
@@ -138,16 +138,16 @@ PreferredSize appBar(String title) {
 }
 
 // ignore: camel_case_types
-class seeMoreBlog extends StatelessWidget {
-  const seeMoreBlog({
+class SeeMoreBlog extends StatelessWidget {
+  const SeeMoreBlog({
     super.key,
     required this.bodyMargin,
-    required this.texttheme,
+    required this.textTheme,
     required this.title,
   });
 
   final double bodyMargin;
-  final TextTheme texttheme;
+  final TextTheme textTheme;
   final String title;
 
   @override
@@ -158,12 +158,12 @@ class seeMoreBlog extends StatelessWidget {
         children: [
           ImageIcon(
             Assets.icons.pen.image().image,
-            color: SolidColors.colorTitel,
+            color: SolidColors.colorTitle,
             size: 20,
           ),
           Text(
             title,
-            style: texttheme.titleSmall,
+            style: textTheme.titleSmall,
           )
         ],
       ),

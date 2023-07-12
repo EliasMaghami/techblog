@@ -42,7 +42,7 @@ class profileScreen extends StatelessWidget {
               children: [
                 ImageIcon(
                   Assets.icons.pen.image().image,
-                  color: SolidColors.colorTitel,
+                  color: SolidColors.colorTitle,
                 ),
                 const SizedBox(
                   height: 8,
@@ -67,10 +67,10 @@ class profileScreen extends StatelessWidget {
             const SizedBox(
               height: 40,
             ),
-            teckDivider(size: size),
+            techDivider(size: size),
             InkWell(
               onTap: (() {}),
-              splashColor: SolidColors.primeryColor,
+              splashColor: SolidColors.primaryColor,
               child: SizedBox(
                 height: 45,
                 child: Text(
@@ -79,10 +79,10 @@ class profileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            teckDivider(size: size),
+            techDivider(size: size),
             InkWell(
               onTap: (() {}),
-              splashColor: SolidColors.primeryColor,
+              splashColor: SolidColors.primaryColor,
               child: SizedBox(
                 height: 45,
                 child: Text(
@@ -91,10 +91,10 @@ class profileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            teckDivider(size: size),
+            techDivider(size: size),
             InkWell(
               onTap: (() {}),
-              splashColor: SolidColors.primeryColor,
+              splashColor: SolidColors.primaryColor,
               child: SizedBox(
                 height: 45,
                 child: Text(
