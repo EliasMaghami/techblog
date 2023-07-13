@@ -1,8 +1,10 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:techblog/component/decrations.dart';
 import 'package:techblog/component/dimens.dart';
@@ -13,13 +15,12 @@ import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/models/podcast_model.dart';
 
 class PodcastSingle extends StatelessWidget {
-  late SinglePodcastController singlePodcastController;
+  late SinglePodcastController controller;
   late PodcastModel podcastModel;
   // ignore: use_key_in_widget_constructors
   PodcastSingle() {
     podcastModel = Get.arguments;
-    singlePodcastController =
-        Get.put(SinglePodcastController(id: podcastModel.id));
+    controller = Get.put(SinglePodcastController(id: podcastModel.id));
   }
 
   @override
@@ -95,6 +96,7 @@ class PodcastSingle extends StatelessWidget {
                         )
                       ],
                     ),
+                    //title
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Align(
@@ -102,10 +104,11 @@ class PodcastSingle extends StatelessWidget {
                         child: Text(
                           podcastModel.title!,
                           maxLines: 2,
-                          style: textTheme.bodyMedium,
+                          style: textTheme.titleMedium,
                         ),
                       ),
                     ),
+                    //writer
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -119,7 +122,7 @@ class PodcastSingle extends StatelessWidget {
                           ),
                           Text(
                             podcastModel.publisher!,
-                            style: textTheme.bodyMedium,
+                            style: textTheme.titleMedium,
                           ),
                           const SizedBox(
                             width: 16,
@@ -127,39 +130,57 @@ class PodcastSingle extends StatelessWidget {
                         ],
                       ),
                     ),
+                    //file List
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Obx(
                         () => ListView.builder(
-                            itemCount:
-                                singlePodcastController.podcastFileList.length,
+                            itemCount: controller.podcastFileList.length,
                             itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        ImageIcon(
-                                          Assets.icons.micIcon.image().image,
-                                          color:
-                                              SolidColors.selectedPodCastColor,
-                                        ),
-                                        SizedBox(
-                                          width: Get.width / 1.5,
-                                          child: Text(
-                                            singlePodcastController
-                                                .podcastFileList[index].title!,
-                                            style: textTheme.bodyMedium,
+                              return GestureDetector(
+                                onTap: () async {
+                                  await controller.player
+                                      .seek(Duration.zero, index: index);
+                                  controller.currentFileIndex.value =
+                                      controller.player.currentIndex!;
+
+                                  controller.timerCheck();
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          ImageIcon(
+                                            Assets.icons.micIcon.image().image,
+                                            color: SolidColors
+                                                .selectedPodCastColor,
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                        "${singlePodcastController.podcastFileList[index].length!}:00")
-                                  ],
+                                          SizedBox(
+                                            width: Get.width / 1.5,
+                                            child: Obx(
+                                              () => Text(
+                                                controller
+                                                    .podcastFileList[index]
+                                                    .title!,
+                                                style: controller
+                                                            .currentFileIndex
+                                                            .value ==
+                                                        index
+                                                    ? textTheme.titleSmall
+                                                    : textTheme.titleMedium,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Text(
+                                          "${controller.podcastFileList[index].length!}:00")
+                                    ],
+                                  ),
                                 ),
                               );
                             }),
@@ -169,6 +190,7 @@ class PodcastSingle extends StatelessWidget {
                 ),
               ),
             ),
+            //player manager
             Positioned(
               bottom: 8,
               left: Dimens.bodyMargin,
@@ -180,31 +202,99 @@ class PodcastSingle extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      LinearPercentIndicator(
-                        percent: 1.0,
-                        backgroundColor: Colors.white,
-                        progressColor: Colors.amber,
+                      Obx(
+                        () => ProgressBar(
+                          timeLabelTextStyle:
+                              const TextStyle(color: Colors.white),
+                          thumbColor: Colors.amber,
+                          baseBarColor: Colors.white,
+                          progressBarColor: Colors.orange,
+                          buffered: controller.bufferedValue.value,
+                          progress: controller.progressValue.value,
+                          total: controller.player.duration ??
+                              const Duration(seconds: 0),
+                          onSeek: (Position) async {
+                            controller.player.seek(Position);
+
+                            if (controller.player.playing) {
+                              controller.startProgress();
+                            } else if (Position <= const Duration(seconds: 0)) {
+                              await controller.player.seekToNext();
+                              controller.currentFileIndex.value =
+                                  controller.player.currentIndex!;
+                              controller.timerCheck();
+                            }
+                          },
+                        ),
                       ),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Icon(
-                            Icons.skip_next,
-                            color: Colors.white,
+                          GestureDetector(
+                            onTap: () async {
+                              await controller.player.seekToNext();
+                              controller.currentFileIndex.value =
+                                  controller.player.currentIndex!;
+                              controller.timerCheck();
+                            },
+                            child: const Icon(
+                              Icons.skip_next,
+                              color: Colors.white,
+                            ),
                           ),
-                          Icon(
-                            Icons.play_circle_fill_outlined,
-                            color: Colors.white,
-                            size: 35,
+                          GestureDetector(
+                            onTap: () {
+                              controller.player.playing
+                                  ? controller.timer!.cancel()
+                                  : controller.startProgress();
+
+                              controller.player.playing
+                                  ? controller.player.pause()
+                                  : controller.player.play();
+
+                              controller.playState.value =
+                                  controller.player.playing;
+
+                              controller.currentFileIndex.value =
+                                  controller.player.currentIndex!;
+                            },
+                            child: Obx(
+                              () => Icon(
+                                controller.playState.value
+                                    ? Icons.pause_circle_filled
+                                    : Icons.play_circle_filled,
+                                color: Colors.white,
+                                size: 35,
+                              ),
+                            ),
                           ),
-                          Icon(
-                            Icons.skip_previous,
-                            color: Colors.white,
+                          GestureDetector(
+                            onTap: () async {
+                              await controller.player.seekToPrevious();
+                              controller.currentFileIndex.value =
+                                  controller.player.currentIndex!;
+                              controller.timerCheck();
+                            },
+                            child: const Icon(
+                              Icons.skip_previous,
+                              color: Colors.white,
+                            ),
                           ),
-                          SizedBox(),
-                          Icon(
-                            Icons.repeat,
-                            color: Colors.white,
+                          const SizedBox(),
+                          Obx(
+                            () => GestureDetector(
+                              onTap: () async {
+                                //   await controller.player.setLoopMode(LoopMode.one);
+                                //   controller.currentFileIndex.value =
+                                //       controller.player.currentIndex!;
+                              },
+                              child: Icon(
+                                Icons.repeat,
+                                color: controller.isLoopAll.value
+                                    ? Colors.blue
+                                    : Colors.white,
+                              ),
+                            ),
                           ),
                         ],
                       ),
