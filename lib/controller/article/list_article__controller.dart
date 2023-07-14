@@ -27,10 +27,17 @@ class ListArticleController extends GetxController {
     }
   }
 
-  getArticleListWithTagsId(String tagId) async {
+  getArticleListWithTagsId(String id) async {
     articleList.clear();
-    var response = await DioService().getMethod(ApiUrlConstant.getArticleList);
     loading.value = true;
+    final queryParam = {
+      'command': 'get_articles_with_tag_id',
+      'tag_id': id,
+      'user_id': '',
+    };
+    final uri =
+        Uri.https(ApiUrlConstant.baseUrl, 'article/get.php?', queryParam);
+    var response = await DioService().getMethod(uri.toString());
 
     //TODO:get user from getStorage Api Constant.getArticleList+userid
 

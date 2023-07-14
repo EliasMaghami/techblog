@@ -1,4 +1,5 @@
 class ApiUrlConstant {
+  ApiUrlConstant._();
   static const hastDlUrl = " https://techblog.sasansafari.com";
   static const baseUrl = "https://techblog.sasansafari.com/Techblog/api/";
   static const getHomeItem = "${baseUrl}home/?command=index";
@@ -9,7 +10,7 @@ class ApiUrlConstant {
 
   static const getArticleInfo =
       "${baseUrl}article/get.php?command=info&id=1&user_id=1";
-  static const postRsgtister = "${baseUrl}register/action.php";
+  static const postRegister = "${baseUrl}register/action.php";
   static const articlePost = "${baseUrl}article/post.php";
 
   // ignore: constant_identifier_names

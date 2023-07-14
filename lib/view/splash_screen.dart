@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:techblog/constant/my_colors.dart';
-import 'package:techblog/main.dart';
+import 'package:techblog/route_manage/names.dart';
 
 class SplashScreen extends StatefulWidget {
   @override

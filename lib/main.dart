@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:techblog/binding.dart';
+import 'package:techblog/route_manage/binding.dart';
 import 'package:techblog/constant/my_colors.dart';
-import 'package:techblog/view/article/manage_article.dart';
-import 'package:techblog/view/article/single%20_manage_article.dart';
-import 'package:techblog/view/main_screen.dart';
-import 'package:techblog/view/article/single.dart';
-import 'package:techblog/view/podcast/single_podcast.dart';
-import 'package:techblog/view/splash_screen.dart';
+import 'package:techblog/route_manage/names.dart';
+import 'package:techblog/route_manage/pages.dart';
 
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(
@@ -33,48 +28,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var texttheme = Theme.of(context).textTheme;
+    var textTheme = Theme.of(context).textTheme;
 
     return GetMaterialApp(
+      initialRoute: NamedRoute.initialRoute,
       initialBinding: RegisterBinding(),
       debugShowCheckedModeBanner: false,
-      theme: ligthTheme(texttheme),
+      theme: lightTheme(textTheme),
       locale: const Locale('en'), // english
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-
-      getPages: [
-        GetPage(
-            name: NamedRoute.routMainSCreen,
-            page: () => MainScreen(),
-            binding: RegisterBinding()),
-        GetPage(
-            name: NamedRoute.routSingleArticle,
-            page: () => Single(),
-            binding: ArticleBinding()),
-        GetPage(
-            name: NamedRoute.manageArticle,
-            page: () => ManageArticle(),
-            binding: ArticleManagerBinding()),
-        GetPage(
-            name: NamedRoute.singleManageArticle,
-            page: () => SingleManageArticle(),
-            binding: ArticleManagerBinding()),
-        GetPage(
-          name: NamedRoute.singlePodcast,
-          page: () => PodcastSingle(),
-        ),
-      ],
-
-      home: SplashScreen(),
-      //
+      // localizationsDelegates: const [
+      // GlobalMaterialLocalizations.delegate,
+      // GlobalWidgetsLocalizations.delegate,
+      // GlobalCupertinoLocalizations.delegate,
+      // ],
+      getPages: Pages.pages,
     );
   }
 
-  ThemeData ligthTheme(TextTheme texttheme) {
+  ThemeData lightTheme(TextTheme textTheme) {
     return ThemeData(
       fontFamily: 'B-ROYA',
       textTheme: const TextTheme(
@@ -116,9 +87,9 @@ class MyApp extends StatelessWidget {
         style: ButtonStyle(
           textStyle: MaterialStateProperty.resolveWith((states) {
             if (states.contains(MaterialState.pressed)) {
-              return texttheme.bodyMedium;
+              return textTheme.bodyMedium;
             }
-            return texttheme.titleMedium;
+            return textTheme.titleMedium;
           }),
           backgroundColor: MaterialStateColor.resolveWith((states) {
             if (states.contains(MaterialState.pressed)) {
@@ -130,13 +101,4 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-}
-
-class NamedRoute {
-  NamedRoute._();
-  static String routMainSCreen = "/MainScreen";
-  static String routSingleArticle = "/SingleArticle";
-  static String manageArticle = "/ManageArticle";
-  static String singleManageArticle = "/SingleManageArticle";
-  static String singlePodcast = "/singlePodcast";
 }

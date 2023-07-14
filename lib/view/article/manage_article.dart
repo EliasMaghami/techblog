@@ -9,7 +9,7 @@ import 'package:techblog/component/mycomponent.dart';
 import 'package:techblog/controller/article/manage_article_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/constant/my_string.dart';
-import 'package:techblog/main.dart';
+import 'package:techblog/route_manage/names.dart';
 
 class ManageArticle extends StatelessWidget {
   ManageArticle({super.key});
